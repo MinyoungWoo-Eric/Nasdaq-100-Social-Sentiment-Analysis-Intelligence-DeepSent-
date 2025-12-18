@@ -5,14 +5,14 @@ import warnings
 warnings.filterwarnings("ignore")
 import streamlit as st
 
-# ======================== 导入模块 ========================
+# ======================== Import Module ========================
 from stock_basic_data import (
     STOCK_TICKERS, STOCK_FULL_NAMES, TIME_PERIODS,
     get_stock_price_data, get_stock_fundamental_data,
     plot_ths_style_chart
 )
 
-# 报告模块（缺失时使用 mock）
+# Reporting module (use mock if missing)
 try:
     from data_collector import collect_social_data
     from report_core import generate_report_sections
@@ -24,7 +24,7 @@ except ImportError:
         return "# Report Module Missing\nPlease add `data_collector.py` and `report_generator.py`"
     REPORT_AVAILABLE = False
 
-# ======================== 页面配置 ========================
+# ======================== Page Configuration ========================
 st.set_page_config(
     page_title="Nasdaq-100 Sentiment Intelligence",
     page_icon="Chart Increasing",
@@ -40,7 +40,7 @@ st.markdown("---")
 if 'selected_period' not in st.session_state:
     st.session_state.selected_period = "1 Year"
 
-# ======================== 股票选择 ========================
+# ======================= Stock Selection ========================
 selected_ticker = st.selectbox(
     "Search & Select Nasdaq-100 Stock",
     options=STOCK_TICKERS,
@@ -50,7 +50,7 @@ selected_ticker = st.selectbox(
     key="ticker_selectbox"
 )
 
-# ======================== 主内容区：极致专业布局 ========================
+# ======================== Main Content Area: Ultimate Professional Layout ========================
 st.subheader(f"{selected_ticker} — Core Fundamentals")
 
 # 时间周期选择
@@ -64,11 +64,11 @@ with col_period:
     )
     st.session_state.selected_period = selected_period
 
-# 加载价格数据 + 指标
+# Load price data + indicators
 price_data = get_stock_price_data(selected_ticker, period=TIME_PERIODS[selected_period])
 indicators = get_stock_fundamental_data(selected_ticker)
 
-# ======================== 第二部分：K线 + 成交量（占满宽度） ========================
+# ======================== Part Two: Candlestick Chart + Trading Volume ========================
 if not price_data.empty:
     kline_fig, volume_fig = plot_ths_style_chart(selected_ticker, price_data, selected_period)
     st.plotly_chart(kline_fig, use_container_width=True, config={'displayModeBar': False})
@@ -76,7 +76,7 @@ if not price_data.empty:
 else:
     st.info("No price data available")
 
-# ======================== 第三部分：所有核心指标横向排列（在图下方） ========================
+# ======================== Part Three: All Core Indicators Arranged Horizontally (below the chart) ========================
 st.markdown("#### Core Trading Indicators")
 
 # 创建 5 列布局（可容纳所有指标）
@@ -102,7 +102,7 @@ with c5:
     st.metric("P/S Ratio", indicators.get("PS Ratio", "N/A"))
 
 
-# ======================== 情绪报告生成区（专业双控件 + 自定义日期版） ========================
+# ======================== Mood Report Generation Area ========================
 st.divider()
 st.subheader("Sentiment Analysis Report Generation Agent")
 
@@ -125,15 +125,15 @@ with col2:
     with col_end:
         end_date = st.date_input("End date", value=datetime.today())
 
-# 防止开始日期晚于结束日期
+# Prevent start date from being later than end date
 if start_date > end_date:
     st.error("Start date cannot be later than end date")
     st.stop()
 
-# 计算预计条数和时间
+# Calculate the estimated number of entries and time
 days = (end_date - start_date).days + 1
 estimated_articles = min(daily_limit * days, 3000)
-estimated_time = int(estimated_articles / 100 * 60)  # 约12秒/100条
+estimated_time = int(estimated_articles / 100 * 60)  
 
 days = (end_date - start_date).days + 1
 st.caption(f"Analysis period: **{days}** days · Totally **{estimated_articles}** articles")
@@ -147,12 +147,12 @@ generate_btn = st.button(
     use_container_width=True
 )
 
-# 缓存键：根据 ticker + 时间段 + 每日上限 生成唯一 key
+# Cache key: Generate a unique key based on ticker + time period + daily limit
 cache_key = f"report_{selected_ticker}_{start_date}_{end_date}_{daily_limit}"
 
 if generate_btn or cache_key in st.session_state:
     if cache_key not in st.session_state:
-        # 首次生成
+        # First generation
         prog = st.progress(0)
         status = st.empty()
 
@@ -160,7 +160,7 @@ if generate_btn or cache_key in st.session_state:
         prog.progress(20)
         start_time = time.time()
 
-        # 关键：传新参数给 data_collector
+        # Key point: Passing new parameters to data_collector
         result = collect_social_data(
             ticker=selected_ticker,
             daily_limit=daily_limit,
@@ -179,7 +179,7 @@ if generate_btn or cache_key in st.session_state:
             chart_path=result.get("trend_chart")
         )
 
-        # 缓存结果
+        # Cache results
         st.session_state[cache_key] = {
             "report": report,
             "fig": result.get("fig"),
@@ -192,12 +192,12 @@ if generate_btn or cache_key in st.session_state:
         prog.empty()
 
 
-    # 读取缓存并展示
+    # Read cache and display
     cache = st.session_state[cache_key]
 
     st.markdown("---")
 
-    # ==================== 1. 先完整渲染 Snapshot 统计表 ====================
+    # ==================== 1. First, fully render the Snapshot statistics table ====================
     report_lines = cache["report"].split('\n')
     snapshot_end_idx = next(
         (i for i, line in enumerate(report_lines)
@@ -207,7 +207,7 @@ if generate_btn or cache_key in st.session_state:
     snapshot_part = '\n'.join(report_lines[:snapshot_end_idx])
     st.markdown(snapshot_part, unsafe_allow_html=True)
 
-    # ==================== 2. 情绪趋势折线图 ====================
+    # ==================== 2. Sentiment Trend Line Chart ====================
     if cache.get("fig"):
         st.markdown("#### Sentiment Trend Over Time")
         st.plotly_chart(
@@ -219,7 +219,7 @@ if generate_btn or cache_key in st.session_state:
     else:
         st.info("Sentiment trend chart not available")
 
-    # ==================== 3. 新增：每日情绪箱线图（关键位置！）===================
+    # ==================== 3. Added: Daily Sentiment Box Line Chart ===================
     try:
         from sentiment_boxplot import plot_daily_sentiment_boxplot
 
@@ -239,11 +239,11 @@ if generate_btn or cache_key in st.session_state:
     except Exception as e:
         st.error(f"Boxplot rendering error: {e}")
 
-    # ==================== 4. 渲染报告剩余正文 ====================
+    # ==================== 4. Remaining text of the rendering report ====================
     remaining_part = '\n'.join(report_lines[snapshot_end_idx:])
     st.markdown(remaining_part, unsafe_allow_html=True)
 
-    # ==================== 下载按钮等 ====================
+    # ==================== Download button, etc. ====================
     st.download_button(
         label="Download Full Report (Markdown)",
         data=cache["report"],
@@ -260,7 +260,7 @@ if generate_btn or cache_key in st.session_state:
             del st.session_state[cache_key]
         st.rerun()
 
-# ======================== 页脚 ========================
+# ======================= Footer =========================
 st.markdown("---")
 st.caption("Powered by Alpha Vantage • Azure GPT-4o • yfinance • Streamlit | © 2025 DeepSent • Nasdaq-100 Sentiment Analysis Intelligence")
 st.caption("© Team of Lechuan WANG, Minyoung WOO, Xuantao YUAN, Yijie WANG. (2025). All rights reserved")
