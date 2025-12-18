@@ -1,5 +1,5 @@
 # sentiment_boxplot.py
-# 2025 Ultimate Edition - 每日情绪分布箱线图（专业机构级可视化）
+# 2025 Ultimate Edition
 import pandas as pd
 import plotly.graph_objects as go
 from typing import List, Dict, Any
