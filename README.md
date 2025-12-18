@@ -9,9 +9,9 @@
 <img width="1766" height="1584" alt="fbcff75e40d0482cd67d467e215e17ba" src="https://github.com/user-attachments/assets/d7117c51-ce56-44ac-9fec-78d222059e96" />
 
 ### *Part 2: Sentiment Analysis Report Generator*
-<img width="1760" height="478" alt="a881ed855f7d65079e600339cb907e58" src="https://github.com/user-attachments/assets/5905318e-1ef8-4b50-94f8-6c8a2654b18d" />
+<img width="2486" height="600" alt="233ac26a5fec02863c3c5e25c34a7510" src="https://github.com/user-attachments/assets/62481972-511a-4c64-a780-09ce7f9842fb" />
 
-### *Part 3: Report Content (Taking Nvidia's December 2nd to December 9th as an example)*
+### *Part 3: Report Content (Taking Nvidia's December 11th to December 17th as an example)*
 #### *The report contains Snapshot & Trend Sector, `Sentiment Anomaly Drivers` Analysis, `Bull vs Bear Narrative Dominance`, `Short-Term Price Implication`, and `Daily Event Timeline` sections.*
 <img width="1738" height="468" alt="8161ff41bbb4a8f3fc63c071ff34903b" src="https://github.com/user-attachments/assets/fc3449a3-60c9-4ea9-941f-01b86db54296" />
 <img width="1688" height="1658" alt="1be9c08f14a75e1f0ee5d0a1a88fe33d" src="https://github.com/user-attachments/assets/f60c1e9b-bf60-404b-8b5d-cb305ac0a8b1" />
