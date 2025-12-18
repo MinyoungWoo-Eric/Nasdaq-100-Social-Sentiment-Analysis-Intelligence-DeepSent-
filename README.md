@@ -1,8 +1,11 @@
 # DeepSent（2025）: *Nasdaq-100 Social Sentiment Analysis Intelligence*
+View in Streamlit: https://deepsent2025.streamlit.app/
+
+---
 
 - **Authors**: *Lechuan Wang, Minyoung Woo, Xuantao Yuan, Yijie Wang*
 - **Institution**: Hong Kong University of Science and Technology, MSc in Business Analytics
-- **Email: lechuanwang2003@163.com**
+- **Correspondence**: lechuanwang2003@163.com
 
 ## Example Output
 ### *Part 1: Fundamental Data Sector*
