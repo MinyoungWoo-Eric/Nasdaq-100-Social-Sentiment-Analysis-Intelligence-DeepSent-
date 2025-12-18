@@ -31,11 +31,6 @@ class FixedAsyncClient(AsyncHttpxClientWrapper):
 openai._base_client.SyncHttpxClientWrapper  = FixedSyncClient
 openai._base_client.AsyncHttpxClientWrapper = FixedAsyncClient
 
-# ============ Azure OpenAI Config ============
-os.environ["AZURE_OPENAI_API_KEY"]    = "c381e0f9e8cb4a7d9677790929ee106a"   #c381e0f9e8cb4a7d9677790929ee106a
-os.environ["AZURE_OPENAI_ENDPOINT"]   = "https://hkust.azure-api.net"
-os.environ["OPENAI_API_VERSION"]      = "2023-05-15"
-
 CHAT_DEPLOYMENT = "gpt-4o"
 EMBEDDING_DEPLOYMENT = "text-embedding-ada-002"
 
@@ -95,10 +90,17 @@ def throttle(seconds: float = 1.0):
 CHROMA_ROOT_DIR = "./chroma_temp_root"
 os.makedirs(CHROMA_ROOT_DIR, exist_ok=True)
 
+import tempfile
+
 def get_unique_chroma_dir(prefix: str = "vector_db") -> str:
-    """生成唯一的Chroma子目录路径（隶属于根目录）"""
-    unique_id = str(uuid.uuid4())[:8]  # 缩短UUID长度，便于管理
-    unique_dir = os.path.join(CHROMA_ROOT_DIR, f"{prefix}_{unique_id}")
+    """
+    在系统临时目录中创建唯一的Chroma目录
+    Streamlit Cloud 文件系统临时且只读，重启后自动清理，无需手动管理
+    """
+    # 使用系统临时目录，每次运行独立，避免冲突
+    temp_root = tempfile.mkdtemp(prefix="chroma_")
+    unique_id = str(uuid.uuid4())[:8]
+    unique_dir = os.path.join(temp_root, f"{prefix}_{unique_id}")
     os.makedirs(unique_dir, exist_ok=True)
     return unique_dir
 
@@ -134,17 +136,36 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+import streamlit as st
 
+# ============ Azure OpenAI Config（通过 Secrets 安全读取） ============
+def get_azure_config():
+    """从 st.secrets 安全获取 Azure 配置"""
+    try:
+        return {
+            "api_key": st.secrets["AZURE_OPENAI_API_KEY"],
+            "endpoint": st.secrets["AZURE_OPENAI_ENDPOINT"],
+            "api_version": st.secrets.get("OPENAI_API_VERSION", "2023-05-15"),
+            "chat_deployment": st.secrets.get("CHAT_DEPLOYMENT", "gpt-4o"),
+            "embedding_deployment": st.secrets.get("EMBEDDING_DEPLOYMENT", "text-embedding-ada-002"),
+        }
+    except Exception as e:
+        st.error("❌ 未检测到 Azure OpenAI 配置！请在 Streamlit Secrets 中设置相关密钥。")
+        raise e
+
+# ============ 初始化LLM和嵌入模型（懒加载 + Secrets） ============
 _llm: Optional[AzureChatOpenAI] = None
 _embeddings: Optional[AzureOpenAIEmbeddings] = None
 
 def get_llm():
-    """懒加载LLM模型，避免启动时调用API"""
     global _llm
     if _llm is None:
+        config = get_azure_config()
         _llm = AzureChatOpenAI(
-            azure_deployment=CHAT_DEPLOYMENT,
-            api_version="2023-05-15",
+            azure_endpoint=config["endpoint"],
+            azure_deployment=config["chat_deployment"],
+            api_version=config["api_version"],
+            api_key=config["api_key"],
             temperature=0.7,
             max_tokens=4000,
             timeout=180,
@@ -153,12 +174,14 @@ def get_llm():
     return _llm
 
 def get_embeddings():
-    """懒加载嵌入模型，避免启动时调用API"""
     global _embeddings
     if _embeddings is None:
+        config = get_azure_config()
         _embeddings = AzureOpenAIEmbeddings(
-            azure_deployment=EMBEDDING_DEPLOYMENT,
-            api_version="2023-05-15",
+            azure_endpoint=config["endpoint"],
+            azure_deployment=config["embedding_deployment"],
+            api_version=config["api_version"],
+            api_key=config["api_key"],
             request_timeout=60,
             max_retries=3,
         )
