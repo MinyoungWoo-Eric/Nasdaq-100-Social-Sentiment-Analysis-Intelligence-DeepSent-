@@ -31,9 +31,6 @@ class FixedAsyncClient(AsyncHttpxClientWrapper):
 openai._base_client.SyncHttpxClientWrapper  = FixedSyncClient
 openai._base_client.AsyncHttpxClientWrapper = FixedAsyncClient
 
-CHAT_DEPLOYMENT = "gpt-4o"
-EMBEDDING_DEPLOYMENT = "text-embedding-ada-002"
-
 # ============ 核心优化：重试+节流装饰器 ============
 def retry_on_azure_error(max_retries: int = 5, delay: float = 3.0, backoff: float = 1.5):
     """
