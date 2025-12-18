@@ -1,4 +1,4 @@
-# stock_basic_data.py - 2025 极速版（点击即显，无延迟）
+# stock_basic_data.py
 import yfinance as yf
 import plotly.graph_objects as go
 import pandas as pd
