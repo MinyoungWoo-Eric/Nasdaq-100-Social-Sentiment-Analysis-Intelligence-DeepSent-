@@ -1,4 +1,4 @@
-# app_main.py - Nasdaq-100 机构级情绪情报系统 · 2025 Ultimate Edition
+# app_main.py
 import time
 from datetime import datetime, timedelta
 import warnings
