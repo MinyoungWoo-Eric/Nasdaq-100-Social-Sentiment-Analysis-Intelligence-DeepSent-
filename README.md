@@ -46,32 +46,31 @@
 
 
 ## 2. Solution: Sentiment Analysis Report
-### Key Features
-#### Single-Channel Reliability
-- Alpha Vantage curated financial news
-- Quality over quantity – eliminate social media noise
+### Single-Channel Reliability (Not Multi-Channel Noise)
+- Alpha Vantage - curated, quality-controlled financial news with sentiment
+- Signal Quality Over Quantity (Coverage Breadth) – eliminate social media misinformation & emotional noise
 
-#### Customizable Parameters (User Control)
+### Customizable Parameters (User Control Over Data Volume)
 - Number of Articles per Day 
-- Time Window
+- Time Window -> Focus on Recent Momentum or Long-Term Trends
 
-#### Deep AI Insights (Powered by GPT-4o)
+### Deep AI Insights (Powered by GPT-4o)
 - Root Cause Analysis
 - Theme Extraction
 - Anomaly Detection
 - Short-term Implication
 - Event Timeline
 
-#### Professional Export
-- Download as markdown format
-- Includes charts, indicators, narratives, and timeline 
+### Professional Export
+- Download as Markdown Format
+- Includes Charts, Indicators, Narratives, and Timeline 
 
 
 ## 3. Potential Impact & Strategic Value
 ### Deep Analysis
-- Not a single sentiment score
-- Combine Score + Root Cause + Thematic breakdown (all sourced)
-- Improve confidence in decisions
+- Not a Single Sentiment Score
+- Combine Score + Root Cause + Thematic Breakdown (all sourced)
+- Improve Confidence in Decisions
 
 ### Better Risk Management
 - Elaboration on which events drive each sentiment shift
@@ -80,12 +79,12 @@
 - Root cause analysis distinguishes signal from noise
 
 ### Reliability
-- All insights source-anchored
-- Zero hallucination through RAG technology
-- Enhance decision confidence through transparency & traceability
+- All Insights Source-Anchored
+- Zero Hallucination through RAG Technology
+- Enhance Decision Confidence through Transparency & Traceability
 
 ### Massive Time Savings
-- Spend less time collecting & summarizing information across various sources
+- Spend less time on collecting & summarizing information across various sources
 - More time on judgement & strategy development (AI handles heavy lifting)
 
 
@@ -106,23 +105,24 @@ Benefit from the same value: `Decisive, Professional-Grade Intelligence Delivere
 
 
 ## 6. Governance & Responsible AI Design
+Didn't treat compliance as an afterthought. It's baked into the design:
 ### Data Governance
-- Public data only (Alpha Vantage & Yahoo Finance)
-- Complete source transparency
-- No personal data collection
+- Public Data Only (Alpha Vantage & Yahoo Finance)
+- Complete Source Transparency
+- No Personal Data Collection
 
 ### AI Transparency
-- Show articles (with source evidence) behind sentiment scores
-- RAG-anchored narratives (no hallucinations)
+- Show Articles (with source evidence) behind Sentiment Scores
+- RAG-Anchored Narratives (no hallucinations)
 
 ### Human-in-the-Loop
-- Decision-support tool only 
-- No autonomous trading functionality
-- Sentiment as one signal among many (not sole decision driver)
+- Decision-Support Tool Only 
+- No Autonomous Trading Functionality
+- Sentiment as One Signal among Many (not sole decision driver)
 
 ### Regulatory Alignment
-- Positioned as research tool, not investment advice
-- Audit-ready design for compliance requirements
+- Positioned as Research Tool, Not Investment Advice
+- Audit-Ready Design for Compliance Requirements
 
 
 ## 7. Technology: Availability of Core Components
