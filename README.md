@@ -1,8 +1,8 @@
-# DeepSent（2025）: *Nasdaq-100 Social Sentiment Analysis Intelligence*
+# DeepSent (2025): *Nasdaq-100 Social Sentiment Analysis Intelligence*
 ### Streamlit App: https://deepsent2025.streamlit.app/
 ---
 - **Authors**: *Lechuan Wang, Minyoung Woo, Xuantao Yuan, Yijie Wang*
-- **Institution**: Hong Kong University of Science and Technology, MSc in Business Analytics
+- **Institution**: The Hong Kong University of Science and Technology, MSc in Business Analytics
 - **Correspondence**: lechuanwang2003@163.com
 
 ## Example Output
@@ -13,7 +13,7 @@
 <img width="2486" height="600" alt="233ac26a5fec02863c3c5e25c34a7510" src="https://github.com/user-attachments/assets/62481972-511a-4c64-a780-09ce7f9842fb" />
 
 ### *Part 3: Report Content (Taking Nvidia's December 11th to December 17th as an example)*
-#### *The report contains Snapshot & Trend Sector, `Sentiment Anomaly Drivers` Analysis, `Bull vs Bear Narrative Dominance`, `Short-Term Price Implication`, and `Daily Event Timeline` sections.*
+#### *The report contains Snapshot & Trend Sector, `Sentiment Anomaly Drivers Analysis`, `Bull vs Bear Narrative Dominance`, `Short-Term Price Implication`, and `Daily Event Timeline` sections.*
 <img width="1738" height="468" alt="8161ff41bbb4a8f3fc63c071ff34903b" src="https://github.com/user-attachments/assets/fc3449a3-60c9-4ea9-941f-01b86db54296" />
 <img width="1688" height="1658" alt="1be9c08f14a75e1f0ee5d0a1a88fe33d" src="https://github.com/user-attachments/assets/f60c1e9b-bf60-404b-8b5d-cb305ac0a8b1" />
 
@@ -35,14 +35,14 @@
 ### Traditional Manual Analysis Pain Points
 - Scattered Information
 - Time-Consuming
-- No Consistency
-- Shallow Insights
+- No Consistency - different narratives for the same stock
+- Shallow Insights - simple sentiment scores without context
 
 ### Consequences
-- ⏱️ Delayed Decisions
-- 🚨 Missed Signals
-- 📋 Audit Gaps
-- 😕 Low Confidence
+- Delayed Decisions
+- Missed Signals
+- Audit Gaps
+- Low Confidence
 
 
 ## 2. Solution: Sentiment Analysis Report
@@ -52,7 +52,7 @@
 - Quality over quantity – eliminate social media noise
 
 #### Customizable Parameters (User Control)
-- Number of Articles per Day
+- Number of Articles per Day 
 - Time Window
 
 #### Deep AI Insights (Powered by GPT-4o)
@@ -64,31 +64,34 @@
 
 #### Professional Export
 - Download as markdown format
-- Includes charts, indicators, narratives, and timeline
+- Includes charts, indicators, narratives, and timeline 
 
 
 ## 3. Potential Impact & Strategic Value
-### 🔍 Analysis Depth
+### Deep Analysis
 - Not a single sentiment score
-- Combine Score + Root Cause + Themes (with source)
-- Root cause analysis distinguishes signal from noise
+- Combine Score + Root Cause + Thematic breakdown (all sourced)
 - Improve confidence in decisions
 
-### 🛡️ Better Risk Management
+### Better Risk Management
+- Elaboration on which events drive each sentiment shift
 - Proactive identification of sentiment-driven risks
 - Data-backed risk assessment
+- Root cause analysis distinguishes signal from noise
 
-### ✓ Reliability
+### Reliability
 - All insights source-anchored
 - Zero hallucination through RAG technology
-- Build confidence through transparency
+- Enhance decision confidence through transparency & traceability
 
-### ⏳ Massive Time Savings
-- Spend less time collecting & summarizing data
-- More time on judgement & strategy development
+### Massive Time Savings
+- Spend less time collecting & summarizing information across various sources
+- More time on judgement & strategy development (AI handles heavy lifting)
 
 
 ## 4. Intended Users & Use Cases
+A common pain point: `Information Fragmentation`\
+Benefit from the same value: `Decisive, Professional-Grade Intelligence Delivered Fast`
 | User Type | Core Use Cases |
 |-----------|----------------|
 | Portfolio Managers | Early sentiment signals for timing, position sizing, and risk alerts |
@@ -103,21 +106,21 @@
 
 
 ## 6. Governance & Responsible AI Design
-### 🔐 Data Governance
+### Data Governance
 - Public data only (Alpha Vantage & Yahoo Finance)
-- Source transparency
+- Complete source transparency
 - No personal data collection
 
-### 🔍 AI Transparency
+### AI Transparency
 - Show articles (with source evidence) behind sentiment scores
 - RAG-anchored narratives (no hallucinations)
 
-### 👤 Human-in-the-Loop
-- Decision-support tool only
+### Human-in-the-Loop
+- Decision-support tool only 
 - No autonomous trading functionality
 - Sentiment as one signal among many (not sole decision driver)
 
-### ⚖️ Regulatory Alignment
+### Regulatory Alignment
 - Positioned as research tool, not investment advice
 - Audit-ready design for compliance requirements
 
